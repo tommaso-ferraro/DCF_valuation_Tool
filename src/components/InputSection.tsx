@@ -102,6 +102,7 @@ export const InputSection = ({ inputs, setInputs, lang, liveMode, setLiveMode, o
         ...inputs,
         companyName: data.company_name ?? inputs.companyName,
         currentPrice: data.current_price ?? inputs.currentPrice,
+        currency: data.currency ?? inputs.currency,
         sharesOutstanding: data.shares_outstanding ?? inputs.sharesOutstanding,
         baseFCF: data.free_cash_flow ?? inputs.baseFCF,
         industry: mapYahooIndustry(data.industry ?? null),
