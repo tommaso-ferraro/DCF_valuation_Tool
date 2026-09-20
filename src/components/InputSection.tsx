@@ -358,7 +358,9 @@ export const InputSection = ({ inputs, setInputs, lang, liveMode, setLiveMode, o
       {blockingError && (
         <div className="rounded-sm border border-destructive bg-destructive/10 px-4 py-2.5 flex items-center gap-2 text-destructive">
           <AlertTriangle strokeWidth={1.5} className="h-4 w-4" />
-          <span className="text-sm font-medium">{t(lang, "errTGR")}</span>
+          <span className="text-sm font-medium">
+            {inputs.terminalGrowthRate >= inputs.wacc ? t(lang, "errTGR") : t(lang, "errInvalidInputs")}
+          </span>
         </div>
       )}
       {warnings.map((w) => (
