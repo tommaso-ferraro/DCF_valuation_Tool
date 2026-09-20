@@ -232,14 +232,11 @@ export const InputSection = ({ inputs, setInputs, lang, liveMode, setLiveMode, o
                 <Label className="text-xs uppercase tracking-wide text-muted-foreground font-medium">{t(lang, "wacc")}</Label>
                 <HelpHint entry={tt.wacc} />
               </div>
-              <Input
-                type="number"
-                step={0.01}
-                value={inputs.wacc.toFixed(2)}
-                onChange={(e) => set("wacc", parseFloat(e.target.value) || 0)}
+              <WaccManualInput
+                value={inputs.wacc}
+                onChange={(v) => set("wacc", v)}
                 disabled={inputs.useWaccDecomposition}
-                className="rounded-sm font-mono-fin text-right h-9 disabled:opacity-70"
-              />
+              />              
               <p className="text-[10px] text-muted-foreground">{t(lang, "waccHelp")}</p>
             </div>
             <NumInput label={t(lang, "tgr")} value={inputs.terminalGrowthRate} onChange={(v) => set("terminalGrowthRate", v)} step={0.1} tooltip={tt.terminalGrowthRate} helper={t(lang, "tgrHelp")} />
