@@ -35,6 +35,8 @@ const ChartPurpose = ({ title, desc, insight }: { title: string; desc: string; i
 );
 
 export const ChartsSection = ({ inputs, result, lang }: Props) => {
+  const currency = inputs.currency;
+
   const pvData = useMemo(
     () =>
       result
@@ -91,10 +93,10 @@ export const ChartsSection = ({ inputs, result, lang }: Props) => {
             <BarChart data={pvData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} vertical={false} />
               <XAxis dataKey="name" tick={TICK} stroke="hsl(var(--muted-foreground))" />
-              <YAxis tick={TICK} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => formatBillions(v, 1)} />
+              <YAxis tick={TICK} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => formatBillions(v, 1, currency)} />
               <Tooltip
                 contentStyle={TOOLTIP_STYLE}
-                formatter={(v: number) => formatBillions(v, 2)}
+                formatter={(v: number) => formatBillions(v, 2, currency)}
                 cursor={{ fill: "hsl(var(--muted) / 0.3)" }}
               />
               <Bar dataKey="value" radius={[2, 2, 0, 0]}>
@@ -152,7 +154,7 @@ export const ChartsSection = ({ inputs, result, lang }: Props) => {
                           c.isBase && "ring-2 ring-primary ring-inset"
                         )}
                       >
-                        {c.intrinsicValue !== null ? formatCurrency(c.intrinsicValue, 1) : "N/A"}
+                        {c.intrinsicValue !== null ? formatCurrency(c.intrinsicValue, 1, currency) : "N/A"}
                       </td>
                     ))}
                   </tr>
@@ -186,10 +188,10 @@ export const ChartsSection = ({ inputs, result, lang }: Props) => {
             <ComposedChart data={waterfall} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} vertical={false} />
               <XAxis dataKey="name" tick={TICK} stroke="hsl(var(--muted-foreground))" />
-              <YAxis tick={TICK} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => formatBillions(v, 1)} />
+              <YAxis tick={TICK} stroke="hsl(var(--muted-foreground))" tickFormatter={(v) => formatBillions(v, 1, currency)} />
               <Tooltip
                 contentStyle={TOOLTIP_STYLE}
-                formatter={(v: number, name: string) => name === "start" ? null : formatBillions(v, 2)}
+                formatter={(v: number, name: string) => name === "start" ? null : formatBillions(v, 2, currency)}
                 cursor={{ fill: "hsl(var(--muted) / 0.3)" }}
               />
               <Bar dataKey="start" stackId="a" fill="transparent" />
