@@ -81,6 +81,10 @@ export const InputSection = ({ inputs, setInputs, lang, liveMode, setLiveMode, o
   );
 
   const blockingError = inputs.terminalGrowthRate >= inputs.wacc;
+  const blockingError =
+  inputs.terminalGrowthRate >= inputs.wacc ||
+  inputs.sharesOutstanding < VALIDATION.SHARES_MIN ||
+  inputs.currentPrice < VALIDATION.PRICE_MIN;
   const warnings: string[] = [];
   if (inputs.wacc < VALIDATION.WACC_LOW) warnings.push(t(lang, "warnWaccLow"));
   if (inputs.wacc > VALIDATION.WACC_HIGH) warnings.push(t(lang, "warnWaccHigh"));
