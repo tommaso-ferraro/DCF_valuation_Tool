@@ -1,6 +1,7 @@
 export interface DCFInputs {
   companyName: string;
   industry: string;
+  currency: string; // es. "EUR", "USD", "JPY"
   currentPrice: number;
   sharesOutstanding: number; // millions
   baseFCF: number; // €M
