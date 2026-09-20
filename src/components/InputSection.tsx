@@ -26,7 +26,31 @@ interface Props {
   setLiveMode: (b: boolean) => void;
   onCalculate: () => void;
 }
-
+const WaccManualInput = ({ value, onChange, disabled }: { value: number; onChange: (v: number) => void; disabled?: boolean }) => {
+  const [raw, setRaw] = useState(String(value));
+  useEffect(() => {
+    if (parseFloat(raw) !== value) setRaw(String(value));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+  return (
+    <Input
+      type="text"
+      inputMode="decimal"
+      value={raw}
+      onChange={(e) => {
+        const v = e.target.value;
+        if (/^-?\d*\.?\d*$/.test(v)) {
+          setRaw(v);
+          const parsed = parseFloat(v);
+          if (!Number.isNaN(parsed)) onChange(parsed);
+        }
+      }}
+      onBlur={() => setRaw(String(value))}
+      disabled={disabled}
+      className="rounded-sm font-mono-fin text-right h-9 disabled:opacity-70"
+    />
+  );
+};
 export const InputSection = ({ inputs, setInputs, lang, liveMode, setLiveMode, onCalculate }: Props) => {
   const tt = TOOLTIPS[lang];
   const set = <K extends keyof DCFInputs>(k: K, v: DCFInputs[K]) => setInputs({ ...inputs, [k]: v });
