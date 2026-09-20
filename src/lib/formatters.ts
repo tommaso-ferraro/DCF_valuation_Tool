@@ -1,21 +1,31 @@
+const SYMBOLS: Record<string, string> = {
+  EUR: "€",
+  USD: "$",
+  GBP: "£",
+  JPY: "¥",
+  CHF: "CHF ",
+};
+
+export const currencySymbol = (currency?: string): string => SYMBOLS[currency ?? "EUR"] ?? (currency ? currency + " " : "€");
+
 export const formatNumber = (num: number | null | undefined, decimals = 2): string => {
   if (num === null || num === undefined || Number.isNaN(num)) return "—";
   return num.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 };
 
-export const formatCurrency = (num: number | null | undefined, decimals = 2): string => {
+export const formatCurrency = (num: number | null | undefined, decimals = 2, currency = "EUR"): string => {
   if (num === null || num === undefined || Number.isNaN(num)) return "—";
-  return "€" + formatNumber(num, decimals);
+  return currencySymbol(currency) + formatNumber(num, decimals);
 };
 
-export const formatMillions = (num: number | null | undefined, decimals = 0): string => {
+export const formatMillions = (num: number | null | undefined, decimals = 0, currency = "EUR"): string => {
   if (num === null || num === undefined || Number.isNaN(num)) return "—";
-  return "€" + formatNumber(num, decimals) + "M";
+  return currencySymbol(currency) + formatNumber(num, decimals) + "M";
 };
 
-export const formatBillions = (num: number | null | undefined, decimals = 2): string => {
+export const formatBillions = (num: number | null | undefined, decimals = 2, currency = "EUR"): string => {
   if (num === null || num === undefined || Number.isNaN(num)) return "—";
-  return "€" + formatNumber(num / 1000, decimals) + "B";
+  return currencySymbol(currency) + formatNumber(num / 1000, decimals) + "B";
 };
 
 export const formatPercent = (num: number | null | undefined, decimals = 1): string => {
