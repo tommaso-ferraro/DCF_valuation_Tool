@@ -3,6 +3,7 @@ import type { DCFInputs } from "./dcf";
 export const DEFAULT_INPUTS: DCFInputs = {
   companyName: "Siemens AG",
   industry: "Industrials",
+  currency: "EUR",
   currentPrice: 155.0,
   sharesOutstanding: 800,
   baseFCF: 6200,
