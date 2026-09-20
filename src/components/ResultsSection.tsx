@@ -62,8 +62,8 @@ export const ResultsSection = ({ inputs, result, lang }: Props) => {
 
       {/* Metric cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <MetricCard label={t(lang, "intrinsicValue")} value={formatCurrency(result.intrinsicValuePerShare)} />
-        <MetricCard label={t(lang, "marketPrice")} value={formatCurrency(inputs.currentPrice)} />
+        <MetricCard label={t(lang, "intrinsicValue")} value={formatCurrency(result.intrinsicValuePerShare, 2, inputs.currency)} />
+        <MetricCard label={t(lang, "marketPrice")} value={formatCurrency(inputs.currentPrice, 2, inputs.currency)} />
         <MetricCard
           label={t(lang, "upsideDownside")}
           value={(upPositive ? "+" : "") + formatPercent(result.upsideDownside, 2)}
@@ -118,7 +118,7 @@ export const ResultsSection = ({ inputs, result, lang }: Props) => {
               </tr>
               <tr className="bg-primary/5 text-base font-bold">
                 <td className="px-4 py-3" colSpan={3}>{t(lang, "ivps")}</td>
-                <td className="px-4 py-3 text-right">{formatCurrency(result.intrinsicValuePerShare)}</td>
+                <td className="px-4 py-3 text-right">{formatCurrency(result.intrinsicValuePerShare, 2, inputs.currency)}</td>
               </tr>
             </tbody>
           </table>
@@ -127,12 +127,12 @@ export const ResultsSection = ({ inputs, result, lang }: Props) => {
 
       {/* Summary stats */}
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
-        <SummaryCard label={t(lang, "sumPV")} value={formatMillions(result.sumPV)} />
-        <SummaryCard label={t(lang, "tv")} value={formatMillions(result.terminalValue)} />
-        <SummaryCard label={t(lang, "pvTVShort")} value={formatMillions(result.pvTerminalValue)} />
-        <SummaryCard label={t(lang, "ev")} value={formatMillions(result.enterpriseValue)} />
-        <SummaryCard label={t(lang, "netDebt")} value={formatMillions(result.netDebt)} valueClass="text-destructive" />
-        <SummaryCard label={t(lang, "equityValue")} value={formatMillions(result.equityValue)} bold />
+        <SummaryCard label={t(lang, "sumPV")} value={formatMillions(result.sumPV, 0, inputs.currency)} />
+        <SummaryCard label={t(lang, "tv")} value={formatMillions(result.terminalValue, 0, inputs.currency)} />
+        <SummaryCard label={t(lang, "pvTVShort")} value={formatMillions(result.pvTerminalValue, 0, inputs.currency)} />
+        <SummaryCard label={t(lang, "ev")} value={formatMillions(result.enterpriseValue, 0, inputs.currency)} />
+        <SummaryCard label={t(lang, "netDebt")} value={formatMillions(result.netDebt, 0, inputs.currency)} valueClass="text-destructive" />
+        <SummaryCard label={t(lang, "equityValue")} value={formatMillions(result.equityValue, 0, inputs.currency)} bold />
       </div>
     </div>
   );
