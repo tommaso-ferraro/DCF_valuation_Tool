@@ -80,7 +80,6 @@ export const InputSection = ({ inputs, setInputs, lang, liveMode, setLiveMode, o
     [inputs.baseFCF, inputs.fcfGrowthRate]
   );
 
-  const blockingError = inputs.terminalGrowthRate >= inputs.wacc;
   const blockingError =
   inputs.terminalGrowthRate >= inputs.wacc ||
   inputs.sharesOutstanding < VALIDATION.SHARES_MIN ||
